@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ object.username }}</h1>
+<p>{{ object.items }}</p>
+<p>{{ object.price }}</p>
+<p>{{ object.instruction_restaurant }}</p>
+<p>{{ object.instruction_delivery }}</p>
+<p>{{ object.prep_time }}</p>
+<p>{{ object.is_ready }}</p>
+
+{% endblock %}

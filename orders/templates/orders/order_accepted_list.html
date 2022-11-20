@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table table-dark" cellpadding="5" cellspacing="5">
+    <tr>
+        <th>No</th>
+        <th>Username</th>
+        <th>Items</th>
+        <th>Price</th>
+        <th>Instruction for restaurant</th>
+        <th>Instruction for delivery agent</th>
+        <th>Admision time</th>
+        <th>Time Left</th>
+        <th>Ready for pickup</th>
+        <th>Accepted by restaurant</th>
+        <th>Accepted by delivery agent</th>
+        <th>Accept</th>
+    </tr>
+    {% for instance in object_list %}
+    <tr>
+        <td>{{ instance.id }}</td>
+        <td>{{ instance.username }}</td>
+        <td>{{ instance.items }}</td>
+        <td>{{ instance.price }}</td>
+        <td>{{ instance.instruction_restaurant }}</td>
+        <td>{{ instance.instruction_delivery }}</td>
+        <td>{{ instance.add_time }}</td>
+        <td>{{ instance.get_time_left }}</td>
+        <td>{{ instance.is_ready }}</td>
+        <td>{{ instance.accept_rest }}</td>
+        <td>{{ instance.accept_deli }}</td>
+        <td>
+            <form method='POST'>{% csrf_token %}
+                <input type="hidden" value="{{instance.id}}" name="ready-id">
+                <p><input class="btn btn-primary" type='submit' value='Yes' /></p>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
