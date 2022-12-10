@@ -10,11 +10,9 @@ class OrderForm(forms.ModelForm):
     items = forms.CharField(widget=forms.Textarea(
         attrs={'placeholder': 'Items', "rows": 2, "cols": 40, 'style': 'width: 300px;', 'class': 'form-control'}))
     instruction_restaurant = forms.CharField(widget=forms.Textarea(
-        attrs={'required': False, 'placeholder': 'Instruction for restaurant', "rows": 2, "cols": 40, 'style': 'width: 300px;', 'class': 'form-control'}))
+        attrs={'placeholder': 'Instruction for restaurant', "rows": 2, "cols": 40, 'style': 'width: 300px;', 'class': 'form-control'}))
     instruction_delivery = forms.CharField(widget=forms.Textarea(
-        attrs={'required': False, 'placeholder': 'Instruction for delivery', "rows": 2, "cols": 40, 'style': 'width: 300px;', 'class': 'form-control'}))
-    prep_time = forms.DecimalField(widget=forms.TextInput(
-        attrs={'placeholder': 'Preparation Time', 'style': 'width: 300px;', 'class': 'form-control'}))
+        attrs={'placeholder': 'Instruction for delivery', "rows": 2, "cols": 40, 'style': 'width: 300px;', 'class': 'form-control'}))
 
     class Meta:
         model = Order
@@ -24,5 +22,4 @@ class OrderForm(forms.ModelForm):
             'price',
             'instruction_restaurant',
             'instruction_delivery',
-            'prep_time'
         ]

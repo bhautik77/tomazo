@@ -1,12 +1,127 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ object.username }}</h1>
-<p>{{ object.items }}</p>
-<p>{{ object.price }}</p>
-<p>{{ object.instruction_restaurant }}</p>
-<p>{{ object.instruction_delivery }}</p>
-<p>{{ object.prep_time }}</p>
-<p>{{ object.is_ready }}</p>
+<div class="container">
+    <table class="table table-hover table-bordered table-striped text-center" cellpadding="5" cellspacing="5"
+        style="opacity: 0.95; background-color:azure">
+        <thead class="text-center">
+            <tr>
+                <th colspan="2"><a href="../../">Incomig Orders</a>/<a href="../../accepted">Accepted
+                        Orders&nbsp&nbsp</a>Order
+                    Details</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>Order ID</td>
+            <td>{{ order_details.id }}</td>
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td> {{ order_details.username }}</td>
+        </tr>
+        <tr>
+            <td>Items</td>
+            <td>
 
+                <table class="table table-hover table-bordered table-striped text-center" cellpadding="5"
+                    cellspacing="5">
+                    <tr>
+                        <td>Item Name</td>
+                        <td>Price</td>
+                        <td>No of Item</td>
+                    </tr>
+                    {% for items in item_detail %}
+                    <tr>
+
+                        <td>{{ items.item_name }}</td>
+                        <td>{{ items.price }}</td>
+                        <td>{{ items.no_item }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+            </td>
+
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>{{ order_details.price }}</td>
+        </tr>
+        <tr>
+            <td>Instruction for restaurant</td>
+            <td> {{ order_details.instruction_restaurant }}</td>
+        </tr>
+        <tr>
+            <td>Instruction for delivery agent</td>
+            <td> {{ order_details.instruction_delivery }}</td>
+        </tr>
+        <tr>
+            <td>Admission time</td>
+            <td>{{ order_details.add_time }}</td>
+        </tr>
+        <tr>
+            <td>Time Left</td>
+            <td> {{ order_details.get_time_left }}</td>
+        </tr>
+        <tr>
+            <td>Ready for pickup</td>
+            <td> {{ order_details.is_ready }}</td>
+        </tr>
+        <tr>
+            <td>Accepted by restaurant</td>
+            <td>{{ order_details.accept_rest }}</td>
+        </tr>
+        <tr>
+            <td>Accepted by delivery agent</td>
+            <td>{{ order_details.accept_deli }}</td>
+        </tr>
+        <tr>
+            <td>Customer Contact No.</td>
+            <td>{{ customer_user_details.contact_no }}</td>
+        </tr>
+        <tr>
+            <td>Delivery Contact No.</td>
+            <td>{{ deli_details.contact_no }}</td>
+        </tr>
+        <tr>
+            <td>Customer Care Contact No.</td>
+            <td>{{ customer_care_user_details.contact_no }}</td>
+        </tr>
+        <tr>
+            {% if order_details.accept_rest == False %}
+            <td>Accept</td>
+            <td>
+                <div class="form-group">
+                    <form class="" method='POST'>{% csrf_token %}
+                        <input class="form-control " type="hidden" value="{{order_details.id}}" name="order-id">
+                        <div class="form-inline ">
+                            Preparation time (in minutes) &nbsp;&nbsp;<input class="form-control form-inline"
+                                type="number" id="prep-time" name="prep-time" value="40" />
+                        </div>
+                        <br>
+
+                        <p><input class="btn btn-primary" type='submit' name="accept" id="accept" value='Accept' />
+                            <input class="btn btn-outline-danger" type='submit' name="reject" id="reject"
+                                value='Reject' />
+                        </p>
+                    </form>
+                </div>
+            </td>
+            {% elif order_details.is_ready == False %}
+            <td>Mark as ready</td>
+            <td>
+                <form method='POST'>{% csrf_token %}
+                    <input type="hidden" value="{{order_details.id}}" name="order-id">
+                    <p><input class="btn btn-outline-primary" type='submit' name="ready" id="ready"
+                            value='Mark as Ready' /></p>
+                </form>
+            </td>
+
+            {% else %}
+            <td colspan="2" class="text-center">Order is ready</td>
+            {% endif %}
+
+        </tr>
+    </table>
+</div>
 {% endblock %}

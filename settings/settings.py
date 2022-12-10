@@ -120,6 +120,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# STATIC_ROOT: specifies where exactly you yourself will put your static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticroot')
+
+# STATICFILES_DIRS: it tells Django where to look for static files while
+# serving a request.
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
